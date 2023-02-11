@@ -5,8 +5,9 @@
   position: relative;
   left: 438px;
   top: -40px;
-  width: 32px;
-  height: 32px;
+  max-width: 32px;
+  min-height: 32px;
+  width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
@@ -14,8 +15,8 @@
 
 @media screen and (max-width: 597px) {
   .popup__close {
-    width: 20px;
-    height: 20px;
+    max-width: 20px;
+    min-height: 20px;
     left: 262px;
     top: -16;
   }
