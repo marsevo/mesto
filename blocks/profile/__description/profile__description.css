@@ -3,7 +3,7 @@
     padding-right: 18px;
 }
 
-@media screen and (max-width: 748px) {
+@media screen and (max-width: 773px) {
     .profile__description {
         padding-left: 25px;
         padding-right: 0;

@@ -3,7 +3,7 @@
   flex-direction: row;
 }
 
-@media screen and (max-width: 748px) {
+@media screen and (max-width: 773px) {
   .profile__info {
     align-items: center;
   }

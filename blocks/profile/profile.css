@@ -5,7 +5,7 @@
   padding-top: 40px;
 }
 
-@media screen and (max-width: 748px) {
+@media screen and (max-width: 773px) {
   .profile {
     width: calc(100% - (19px + 19px));
     padding: 42px 19px 36px 19px;
