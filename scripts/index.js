@@ -20,12 +20,6 @@ editProfileButton.addEventListener('click', function () {
   userOccupationInput.value = userOccupationElement.textContent;
 });
 
-const closeProfileButton = document.querySelector('#close-profile-button');
-
-closeProfileButton.addEventListener("click", function () {
-  closePopup(editProfilePopup);
-});
-
 // Перезапись полей профиля при нажатии "Сохранить"
 const formElement = document.querySelector('#edit-profile-popup-form');
 
@@ -46,13 +40,6 @@ const addPicturePopup = document.querySelector('#add-popup');
 
 addPictureButton.addEventListener('click', function () {
   openPopup(addPicturePopup);
-});
-
-// Закрываем форму добавления карточки
-const closeAddPictureButton = document.querySelector('#close-add-picture-button');
-
-closeAddPictureButton.addEventListener("click", function () {
-  closePopup(addPicturePopup);
 });
 
 // КЛонируем карточки из template
@@ -158,11 +145,13 @@ function openFullImagePopup(evt) {
   fullImagePopup.alt = cardTitle.textContent;
   openPopup(imagePopup);
 }
+// Закрытие всех крестиков
+// находим все крестики проекта по универсальному селектору
+const closeButtons = document.querySelectorAll('.popup__close');
 
-// Закрываем форму добавления карточки
-const closeFullImageButton = document.querySelector('#close-image-button');
-
-closeFullImageButton.addEventListener("click", function () {
-  closePopup(imagePopup);
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап 
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
 });
-
