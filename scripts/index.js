@@ -1,11 +1,22 @@
+// Объект валидации 
+const validationObject = {
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputSelector: '.popup__text',
+  inputErrorClass: 'popup__text_type_error',
+}
+
 const editProfileButton = document.querySelector('#edit-profile-button');
 const editProfilePopup = document.querySelector('#edit-popup');
 
 // ф-ии открытия-закрытия popup
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener('keydown', ClosePopupByEsc);
 };
+
 function closePopup(popup) {
+  document.removeEventListener('keydown', ClosePopupByEsc);
   popup.classList.remove("popup_opened");
 };
 
@@ -18,6 +29,7 @@ editProfileButton.addEventListener('click', function () {
   openPopup(editProfilePopup);
   userNameInput.value = userNameElement.textContent;
   userOccupationInput.value = userOccupationElement.textContent;
+  resetValidation(validationObject);
 });
 
 // Перезапись полей профиля при нажатии "Сохранить"
@@ -34,12 +46,14 @@ formElement.addEventListener('submit', handleFormSubmit);
 /* -------------5 sprint-------------------- */
 
 // Открываем форму добавления карточки
-
 const addPictureButton = document.querySelector('#add-picture-button');
 const addPicturePopup = document.querySelector('#add-popup');
 
 addPictureButton.addEventListener('click', function () {
   openPopup(addPicturePopup);
+  placeNameInput.value = '';
+  imageLinkInput.value = '';
+  resetValidation(validationObject);
 });
 
 // КЛонируем карточки из template
@@ -107,6 +121,29 @@ function createCard(item) {
 
   return cardElement;
 }
+// функция валидации кнопки Submit 
+const resetSubmit = (validationObject) => {
+  const buttonSubmit = document.querySelectorAll(validationObject.submitButtonSelector);
+
+  buttonSubmit.forEach((button) => {
+    button.classList.add('popup__submit_disabled');
+  });
+}
+// функция валидации строки ввода 
+const resetInput = (validationObject) => {
+  const inputList = document.querySelectorAll(validationObject.inputSelector);
+
+  inputList.forEach((input) => {
+    input.classList.remove(validationObject.inputErrorClass);
+    input.nextElementSibling.textContent = '';
+  });
+}
+
+// функция сброса стилей валидации при открытии Popup
+const resetValidation = (validationObject) => {
+  resetInput(validationObject);
+  resetSubmit(validationObject);
+};
 
 // добавление карточеек по умолчанию
 initialCards.forEach(function (item) {
@@ -128,7 +165,7 @@ addPlaceForm.addEventListener('submit', function (evt) {
   closePopup(addPicturePopup);
 });
 
-function renderCard (cardData) {
+function renderCard(cardData) {
   cards.prepend(createCard(cardData));
 };
 
@@ -145,7 +182,8 @@ function openFullImagePopup(evt) {
   fullImagePopup.alt = cardTitle.textContent;
   openPopup(imagePopup);
 }
-// Закрытие всех крестиков
+
+// закрытие всех крестиков
 // находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.popup__close');
 
@@ -154,4 +192,20 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   // устанавливаем обработчик закрытия на крестик
   button.addEventListener('click', () => closePopup(popup));
+});
+
+// функция закрытия по клавише Esc 
+const ClosePopupByEsc = (evt) => {
+  if (evt.code === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
+};
+
+// закрытие попапов нажитием на overlay
+const popupList = document.querySelectorAll('.popup');
+popupList.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    closePopup(evt.target);
+  });
 });
