@@ -9,6 +9,29 @@ const validationObject = {
 const buttonEditProfile = document.querySelector('#edit-profile-button');
 const editProfilePopup = document.querySelector('#edit-popup');
 
+const userNameElement = document.querySelector('#user-name');
+const userOccupationElement = document.querySelector('#user-occupation');
+const userNameInput = document.querySelector('#user-name-input');
+const userOccupationInput = document.querySelector('#user-occupation-input');
+
+const formElement = document.querySelector('#edit-profile-popup-form');
+
+const buttonAddPicture = document.querySelector('#add-picture-button');
+const addPicturePopup = document.querySelector('#add-popup');
+
+const cardTemplate = document.querySelector(".template").content;
+const cards = document.querySelector(".cards");
+
+const imageLinkInput = document.querySelector("#image-link");
+const placeNameInput = document.querySelector("#place-name");
+const addPlaceForm = document.querySelector("#add-place-popup-form");
+
+const imagePopup = document.querySelector('#image-popup');
+const fullImagePopup = document.querySelector('.popup__full-image');
+const imageCaptionPopup = document.querySelector('.popup__caption');
+
+const closeButtons = document.querySelectorAll('.popup__close');
+
 // ф-ии открытия-закрытия popup
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -20,21 +43,7 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
 };
 
-const userNameElement = document.querySelector('#user-name');
-const userOccupationElement = document.querySelector('#user-occupation');
-const userNameInput = document.querySelector('#user-name-input');
-const userOccupationInput = document.querySelector('#user-occupation-input');
-
-buttonEditProfile.addEventListener('click', function () {
-  userNameInput.value = userNameElement.textContent;
-  userOccupationInput.value = userOccupationElement.textContent;
-  openPopup(editProfilePopup);
-  resetValidation(validationObject);
-});
-
 // Перезапись полей профиля при нажатии "Сохранить"
-const formElement = document.querySelector('#edit-profile-popup-form');
-
 function handleFormSubmit(evt) {
   evt.preventDefault();
   userNameElement.textContent = userNameInput.value;
@@ -45,28 +54,13 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 /* -------------5 sprint-------------------- */
 
-// Открываем форму добавления карточки
-const buttonAddPicture = document.querySelector('#add-picture-button');
-const addPicturePopup = document.querySelector('#add-popup');
-
-buttonAddPicture.addEventListener('click', function () {
-  openPopup(addPicturePopup);
-  placeNameInput.value = '';
-  imageLinkInput.value = '';
-  resetValidation(validationObject);
-});
-
 // КЛонируем карточки из template
-const cardTemplate = document.querySelector(".template").content;
-
 function cloneTemplateCard() {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   return cardElement;
 }
 
-const cards = document.querySelector(".cards");
-
-// опставить лайк
+// поставить лайк
 function makeLikeActive(evt) {
   evt.target.classList.toggle("card__like-button_active");
 }
@@ -94,7 +88,6 @@ function createCard(item) {
   return cardElement;
 }
 
-
 // функция сброса стилей валидации при открытии Popup
 const resetValidation = (validationObject) => {
   resetInput(validationObject);
@@ -106,30 +99,11 @@ initialCards.forEach(function (item) {
   cards.prepend(createCard(item));
 });
 
-// дoбавление новой карточки из popup
-const imageLinkInput = document.querySelector("#image-link");
-const placeNameInput = document.querySelector("#place-name");
-const addPlaceForm = document.querySelector("#add-place-popup-form");
-
-addPlaceForm.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-  renderCard({
-    name: placeNameInput.value,
-    link: imageLinkInput.value,
-  });
-  evt.target.reset();
-  closePopup(addPicturePopup);
-});
-
 function renderCard(cardData) {
   cards.prepend(createCard(cardData));
 };
 
 // открытие popup с full image
-const imagePopup = document.querySelector('#image-popup');
-const fullImagePopup = document.querySelector('.popup__full-image');
-const imageCaptionPopup = document.querySelector('.popup__caption');
-
 function openFullImagePopup(evt) {
   fullImagePopup.src = evt.target.src;
   const cardElement = evt.target.closest(".card");
@@ -139,16 +113,6 @@ function openFullImagePopup(evt) {
   openPopup(imagePopup);
 }
 
-// закрытие всех крестиков
-// находим все крестики проекта по универсальному селектору
-const closeButtons = document.querySelectorAll('.popup__close');
-
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап 
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
 
 // функция закрытия по клавише Esc 
 const closePopupByEsc = (evt) => {
@@ -163,7 +127,43 @@ const popupList = document.querySelectorAll('.popup');
 popupList.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target === evt.currentTarget) {
-    closePopup(evt.target);
+      closePopup(evt.target);
     }
   });
 });
+
+// закрытие всех крестиков
+// находим все крестики проекта по универсальному селектору
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап 
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+buttonEditProfile.addEventListener('click', function () {
+  userNameInput.value = userNameElement.textContent;
+  userOccupationInput.value = userOccupationElement.textContent;
+  openPopup(editProfilePopup);
+  resetValidation(validationObject);
+});
+
+// Открываем форму добавления карточки
+buttonAddPicture.addEventListener('click', function () {
+  openPopup(addPicturePopup);
+  placeNameInput.value = '';
+  imageLinkInput.value = '';
+  resetValidation(validationObject);
+});
+
+// дoбавление новой карточки из popup
+addPlaceForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+  renderCard({
+    name: placeNameInput.value,
+    link: imageLinkInput.value,
+  });
+  evt.target.reset();
+  closePopup(addPicturePopup);
+});
+
