@@ -33,18 +33,6 @@
 
 
         <section class="cards">
-            <template class="template">
-                <div class="card">
-                    <img src="#" alt="#" class="card__image" />
-                    <button type="button" class="card__delete-button link"></button>
-                    <div class="card__description">
-                        <h2 class="card__title"></h2>
-                        <div class="card__like-container">
-                            <button type="button" class="card__like-button link"></button>
-                        </div>
-                    </div>
-                </div>
-            </template>
         </section>
 
 
@@ -54,10 +42,10 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="popup__form" class="popup__form" id="edit-profile-popup-form">
                     <input type="text" name="name" id="user-name-input" value="" placeholder="Укажите имя" minlength="2"
-                        maxlength="40" required class="popup__text">
+                        maxlength="40" class="popup__text">
                     <span id="user-name-input-error" class="popup__error"></span>
                     <input type="text" name="info" id="user-occupation-input" value="" placeholder="Укажите професcию"
-                        minlength="2" maxlength="200" required class="popup__text">
+                        minlength="2" maxlength="200" class="popup__text">
                     <span id="user-occupation-input-error" class="popup__error"></span>
                     <button type="submit" class="popup__submit link">Сохранить</button>
                 </form>
@@ -70,9 +58,9 @@
                 <h2 class="popup__title">Новое место</h2>
                 <form name="popup__form" class="popup__form" id="add-place-popup-form">
                     <input type="text" name="name" id="place-name" value="" placeholder="Название" minlength="2"
-                        maxlength="30" required class="popup__text">
+                        maxlength="30" class="popup__text">
                     <span id="place-name-error" class="popup__error"></span>
-                    <input type="url" name="link" id="image-link" value="" required placeholder="Ссылка на картинку"
+                    <input type="url" name="link" id="image-link" value="" placeholder="Ссылка на картинку"
                         class="popup__text">
                     <span id="image-link-error" class="popup__error"></span>
                     <button type="submit" class="popup__submit link">Создать</button>
@@ -93,6 +81,18 @@
     <footer class="footer">
         <p class="footer__copyright">© 2023 Mesto Russia</p>
     </footer>
+    <template class="template">
+        <div class="card">
+            <img src="#" alt="#" class="card__image" />
+            <button type="button" class="card__delete-button link"></button>
+            <div class="card__description">
+                <h2 class="card__title"></h2>
+                <div class="card__like-container">
+                    <button type="button" class="card__like-button link"></button>
+                </div>
+            </div>
+        </div>
+    </template>
     <script src="scripts/index.js"></script>
     <script src="scripts/validate.js"></script>
 </body>

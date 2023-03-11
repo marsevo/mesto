@@ -6,17 +6,17 @@ const validationObject = {
   inputErrorClass: 'popup__text_type_error',
 }
 
-const editProfileButton = document.querySelector('#edit-profile-button');
+const buttonEditProfile = document.querySelector('#edit-profile-button');
 const editProfilePopup = document.querySelector('#edit-popup');
 
 // ф-ии открытия-закрытия popup
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown', ClosePopupByEsc);
+  document.addEventListener('keydown', closePopupByEsc);
 };
 
 function closePopup(popup) {
-  document.removeEventListener('keydown', ClosePopupByEsc);
+  document.removeEventListener('keydown', closePopupByEsc);
   popup.classList.remove("popup_opened");
 };
 
@@ -25,7 +25,7 @@ const userOccupationElement = document.querySelector('#user-occupation');
 const userNameInput = document.querySelector('#user-name-input');
 const userOccupationInput = document.querySelector('#user-occupation-input');
 
-editProfileButton.addEventListener('click', function () {
+buttonEditProfile.addEventListener('click', function () {
   openPopup(editProfilePopup);
   userNameInput.value = userNameElement.textContent;
   userOccupationInput.value = userOccupationElement.textContent;
@@ -46,10 +46,10 @@ formElement.addEventListener('submit', handleFormSubmit);
 /* -------------5 sprint-------------------- */
 
 // Открываем форму добавления карточки
-const addPictureButton = document.querySelector('#add-picture-button');
+const buttonAddPicture = document.querySelector('#add-picture-button');
 const addPicturePopup = document.querySelector('#add-popup');
 
-addPictureButton.addEventListener('click', function () {
+buttonAddPicture.addEventListener('click', function () {
   openPopup(addPicturePopup);
   placeNameInput.value = '';
   imageLinkInput.value = '';
@@ -126,7 +126,7 @@ const resetSubmit = (validationObject) => {
   const buttonSubmit = document.querySelectorAll(validationObject.submitButtonSelector);
 
   buttonSubmit.forEach((button) => {
-    button.classList.add('popup__submit_disabled');
+    disableButton(validationObject, button);
   });
 }
 // функция валидации строки ввода 
@@ -195,7 +195,7 @@ closeButtons.forEach((button) => {
 });
 
 // функция закрытия по клавише Esc 
-const ClosePopupByEsc = (evt) => {
+const closePopupByEsc = (evt) => {
   if (evt.code === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
@@ -206,6 +206,8 @@ const ClosePopupByEsc = (evt) => {
 const popupList = document.querySelectorAll('.popup');
 popupList.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
+    }
   });
 });

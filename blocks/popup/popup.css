@@ -12,5 +12,5 @@
   height: 100%;
   opacity: 0;
   transition: visibility 0.5s, opacity 0.5s;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
 }
