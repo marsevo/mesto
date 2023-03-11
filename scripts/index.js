@@ -26,9 +26,9 @@ const userNameInput = document.querySelector('#user-name-input');
 const userOccupationInput = document.querySelector('#user-occupation-input');
 
 buttonEditProfile.addEventListener('click', function () {
-  openPopup(editProfilePopup);
   userNameInput.value = userNameElement.textContent;
   userOccupationInput.value = userOccupationElement.textContent;
+  openPopup(editProfilePopup);
   resetValidation(validationObject);
 });
 
@@ -66,34 +66,6 @@ function cloneTemplateCard() {
 
 const cards = document.querySelector(".cards");
 
-// 6 карточек по умолчанию
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 // опставить лайк
 function makeLikeActive(evt) {
   evt.target.classList.toggle("card__like-button_active");
@@ -121,23 +93,7 @@ function createCard(item) {
 
   return cardElement;
 }
-// функция валидации кнопки Submit 
-const resetSubmit = (validationObject) => {
-  const buttonSubmit = document.querySelectorAll(validationObject.submitButtonSelector);
 
-  buttonSubmit.forEach((button) => {
-    disableButton(validationObject, button);
-  });
-}
-// функция валидации строки ввода 
-const resetInput = (validationObject) => {
-  const inputList = document.querySelectorAll(validationObject.inputSelector);
-
-  inputList.forEach((input) => {
-    input.classList.remove(validationObject.inputErrorClass);
-    input.nextElementSibling.textContent = '';
-  });
-}
 
 // функция сброса стилей валидации при открытии Popup
 const resetValidation = (validationObject) => {

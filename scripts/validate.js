@@ -80,3 +80,21 @@ const setEventListeners = (form, config) => {
 
 // включение валидации
 enableValidation(validationConfig); 
+
+// функция валидации строки ввода 
+const resetInput = (config) => {
+    const inputList = document.querySelectorAll(config.inputSelector);
+  
+    inputList.forEach((input) => {
+      input.classList.remove(config.inputErrorClass);
+      input.nextElementSibling.textContent = '';
+    });
+  }
+
+// функция валидации кнопки Submit 
+const resetSubmit = (config) => {
+    const buttonSubmit = document.querySelectorAll(config.submitButtonSelector);
+    buttonSubmit.forEach((button) => {
+      disableButton(config, button);
+    });
+  }
