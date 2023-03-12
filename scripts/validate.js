@@ -48,24 +48,21 @@ const disableButton = (config, buttonSubmit) => {
     buttonSubmit.classList.add(config.inactiveButtonClass);
     buttonSubmit.disabled = true;
 }
-// ф-ия проверки инпутов на валидность
-const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    })
-}
 
 // Функция переключения кнопки submit
 const toggleButton = (form, config) => {
     const buttonSubmit = form.querySelector(config.submitButtonSelector);
     const inputList = Array.from(form.querySelectorAll(config.inputSelector));
-
-    if (hasInvalidInput(inputList)) {
-        disableButton(config, buttonSubmit);
-
-    } else {
-        enableButton(config, buttonSubmit);
-    }
+    let flag = 1;
+    inputList.forEach((input) => {
+        if (input.value == null || input.value == '' || !input.validity.valid ) {
+            disableButton(config, buttonSubmit);
+            flag = 0;
+        }
+        else if (flag != 0) {
+            enableButton(config, buttonSubmit);
+        }
+    });
 }
 
 // ф-ия обработки событий для всех инпутов 
