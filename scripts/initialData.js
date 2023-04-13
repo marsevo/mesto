@@ -1,4 +1,3 @@
-// 6 карточек по умолчанию
 const initialCards = [
     {
       name: "Архыз",
@@ -25,3 +24,14 @@ const initialCards = [
       link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
     },
   ];
+
+  const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__text',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_disabled',
+    inputErrorClass: 'popup__text_type_error',
+    errorClass: 'popup__error_visible'
+}
+
+export { initialCards, validationConfig };
