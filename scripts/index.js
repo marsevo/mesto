@@ -1,5 +1,5 @@
-import { FormValidator } from './formValidator.js';
-import { Card } from './card.js';
+import { FormValidator } from './FormValidator.js';
+import { Card } from './Card.js';
 import { initialCards, validationConfig } from './initialData.js';
 
 const buttonEditProfile = document.querySelector('#edit-profile-button');
@@ -10,7 +10,7 @@ const userOccupationElement = document.querySelector('#user-occupation');
 const userNameInput = document.querySelector('#user-name-input');
 const userOccupationInput = document.querySelector('#user-occupation-input');
 
-const formElement = document.querySelector('#edit-profile-popup-form');
+const profileForm = document.querySelector('#edit-profile-popup-form');
 
 const buttonAddPicture = document.querySelector('#add-picture-button');
 const popupAddPicture = document.querySelector('#add-popup');
@@ -24,8 +24,6 @@ const formAddPlace = document.querySelector("#add-place-popup-form");
 const imagePopup = document.querySelector('#image-popup');
 const fullImagePopup = document.querySelector('.popup__full-image');
 const imageCaptionPopup = document.querySelector('.popup__caption');
-
-const closeButtons = document.querySelectorAll('.popup__close');
 
 // ф-ия создания карточки 
 const createCard = (cardData) => {
@@ -55,18 +53,18 @@ function closePopup(popup) {
 };
 
 // перезапись полей профиля при нажатии "Сохранить"
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   userNameElement.textContent = userNameInput.value;
   userOccupationElement.textContent = userOccupationInput.value;
   closePopup(popupEditProfile);
 }
-formElement.addEventListener('submit', handleFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // добавление карточеек по умолчанию
-initialCards.forEach(function (item) {
-  renderCard(item);
-});
+initialCards.forEach(renderCard); /* Если внутри безымянной (стрелочной) функции вызывается 
+                                   одна функция с точно такими же аргументами, 
+                                   то безымянная функция не нужна */
 
 function renderCard(cardData) {
   cards.prepend(createCard(cardData));
@@ -80,24 +78,18 @@ const closePopupByEsc = (evt) => {
   };
 };
 
-// закрытие попапов нажитием на overlay
-const popupList = document.querySelectorAll('.popup');
-popupList.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closePopup(evt.target);
+// обработчик закрытия по оверлею и крестику
+const popups = document.querySelectorAll('.popup')
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup)
     }
-  });
-});
-
-// закрытие всех крестиков
-// находим все крестики проекта по универсальному селектору
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап 
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
+    if (evt.target.classList.contains('popup__close')) {
+      closePopup(popup)
+    }
+  })
+})
 
 buttonEditProfile.addEventListener('click', function () {
   userNameInput.value = userNameElement.textContent;
@@ -109,8 +101,7 @@ buttonEditProfile.addEventListener('click', function () {
 // Открываем форму добавления карточки
 buttonAddPicture.addEventListener('click', function () {
   openPopup(popupAddPicture);
-  placeNameInput.value = '';
-  imageLinkInput.value = '';
+  formAddPlace.reset();
   validationFormPlace.clearValidationForm();
 });
 

@@ -3,7 +3,7 @@ class Card {
     this._name = card.name;
     this._link = card.link;
     this._templateSelector = templateSelector;
-    this._openCardImage  = openCardImage ;
+    this._openCardImage = openCardImage;
   };
 
   // получить шаблон 
@@ -12,7 +12,7 @@ class Card {
     return cardElement;
   };
 
- // генерация карточки 
+  // генерация карточки 
   generateCard() {
 
     this._cardElement = this._getTemplate();
@@ -31,7 +31,7 @@ class Card {
   };
 
   // функция лайка карточки 
-  _likeCard() {
+  _toggleLike() {
     this._cardElementLike.classList.toggle('card__like-button_active');
   };
 
@@ -43,13 +43,14 @@ class Card {
 
   // слушатели событий (лайк, удаление, открытие фул картинки)
   _setEventListeners() {
-    this._cardElementLike.addEventListener('click', () => this._likeCard());
+    this._cardElementLike.addEventListener('click', () => this._toggleLike());
     this._cardElementDelete.addEventListener('click', () => this._deleteCard());
-    this._cardElementImage.addEventListener('click', () => this._openCardImage (
+    this._cardElementImage.addEventListener('click', () => this._openCardImage(
       {
         link: this._link,
         name: this._name,
       }));
+
   };
 };
 

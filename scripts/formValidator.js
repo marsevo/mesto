@@ -7,11 +7,14 @@ class FormValidator {
     this._errorClass = config.errorClass;
     this._formSelector = config.formSelector;
     this._form = form;
+    this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
+    this._inputList = this._form.querySelectorAll(this._inputSelector);
+    this._inputListArr = Array.from(this._inputList);
   }
 
   // функция валидации формы 
   enableValidation() {
-    this._addInputListners();
+    this._addInputListeners();
   };
 
   // add класс ошибки 
@@ -41,10 +44,8 @@ class FormValidator {
 
   // функция переключения кнопки submit
   _toggleButton() {
-    this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
-    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     let flag = 1;
-    this._inputList.forEach((input) => {
+    this._inputListArr.forEach((input) => {
       if (input.value == null || input.value == '' || !input.validity.valid) {
         this._buttonSubmit.classList.add(this._inactiveButtonClass);
         this._buttonSubmit.disabled = true;
@@ -58,9 +59,8 @@ class FormValidator {
   }
 
   // функция слушателей всех инпутов 
-  _addInputListners() {
+  _addInputListeners() {
     this._toggleButton();
-    this._inputList = this._form.querySelectorAll(this._inputSelector);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._handleFormInput(inputElement);
