@@ -16,18 +16,11 @@ export default class Popup {
     document.removeEventListener('keydown', this._handleEscClosePopup)
   }
 
-  // ф-ия закрытия по ESC */
+  // ф-ия закрытия по ESC
   _handleEscClosePopup = (evt) => {
     if (evt.key === 'Escape') {
       this.close();
     }
-  }
-
-  // закрытие Popup при нажатии на оверлей
-  _handleOverlayClosePopup = (evt) => {
-    if (evt.target === evt.currentTarget) {
-      this.close();
-    };
   }
 
   // обработчик закрытия по оверлею и крестику 
