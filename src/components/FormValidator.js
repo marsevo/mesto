@@ -12,12 +12,12 @@ class FormValidator {
     this._inputListArr = Array.from(this._inputList);
   }
 
-  // функция валидации формы 
+  // функция валидации формы
   enableValidation() {
     this._addInputListeners();
   };
 
-  // add класс ошибки 
+  // add класс ошибки
   _showInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`); //span элемент c id : "inputID + -errorr"
     inputElement.classList.add(this._inputErrorClass);
@@ -25,7 +25,7 @@ class FormValidator {
     errorElement.textContent = inputElement.validationMessage;
   }
 
-  // remove класс ошибки 
+  // remove класс ошибки
   _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`); //span элемент c id : "inputID + -errorr"
     inputElement.classList.remove(this._errorClass);
@@ -58,7 +58,7 @@ class FormValidator {
     });
   }
 
-  // функция слушателей всех инпутов 
+  // функция слушателей всех инпутов
   _addInputListeners() {
     this._toggleButton();
     this._inputList.forEach((inputElement) => {
@@ -69,7 +69,7 @@ class FormValidator {
     })
   };
 
-  // очистка валидации при закрытии формы 
+  // очистка валидации при закрытии формы
   clearValidationForm() {
     this._toggleButton();
     this._inputList.forEach((inputElement) => {

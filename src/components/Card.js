@@ -6,13 +6,13 @@ class Card {
     this._openCardImage = openCardImage;
   };
 
-  // получить шаблон 
+  // получить шаблон
   _getTemplate() {
     const cardElement = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
     return cardElement;
   };
 
-  // генерация карточки 
+  // генерация карточки
   generateCard() {
 
     this._cardElement = this._getTemplate();
@@ -30,12 +30,12 @@ class Card {
     return this._cardElement;
   };
 
-  // функция лайка карточки 
+  // функция лайка карточки
   _toggleLike() {
     this._cardElementLike.classList.toggle('card__like-button_active');
   };
 
-  // функция удаления карточки 
+  // функция удаления карточки
   _deleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
