@@ -5,14 +5,18 @@ class Section {
     };
 
     // отобразить контент
-    renderItems(items) {
+    renderItems(items, user) {
         items.forEach(item => {
-            this._renderer(item);
+            this._renderer(item, user);
         });
     }
 
     // добавить контент
     addItem(card) {
+        this._container.append(card);
+    }
+    // добавить карточку в начало
+    prependItem(card) {
         this._container.prepend(card);
     }
 };

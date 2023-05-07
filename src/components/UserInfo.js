@@ -1,22 +1,28 @@
 class UserInfo {
-    constructor({ selectorUserName, selectorUserOccupation }) {
+    constructor({ selectorUserName, selectorUserAbout, selectorUserAvatar }) {
         this._profileName = document.querySelector(selectorUserName);
-        this._profileOccupation = document.querySelector(selectorUserOccupation);
+        this._profileAbout = document.querySelector(selectorUserAbout);
+        this._profileAvatar = document.querySelector(selectorUserAvatar);
     }
 
     // ф-ия получения информации из профиля
     getUserInfo() {
         return {
             name: this._profileName.textContent,
-            occupation: this._profileOccupation.textContent,
+            about: this._profileAbout.textContent,
         }
     }
 
     // ф-ия добавления инф-ии из формы в профиль
-    addUserInfo(data) {
-        this._profileName.textContent = data.name;
-        this._profileOccupation.textContent = data.occupation;
+    addUserInfo({name, about}) {
+        this._profileName.textContent = name;
+        this._profileAbout.textContent = about;
     }
+
+    // ф-ия добавления ссылки на картинку аватара
+   setUserAvatar(url) {
+    this._profileAvatar.src = url.avatar;
+  }
 };
 
 export { UserInfo };

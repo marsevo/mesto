@@ -1,13 +1,11 @@
 .profile__avatar {
-  object-fit: cover;
+  background-image: url(../../../images/pencil.svg);
+  background-color: #000;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out;
   max-width: 120px;
   min-height: 120px;
   width: 100%;
   border-radius: 50%;
-}
-
-@media screen and (max-width: 773px) {
-  .profile__avatar {
-    margin: 0 0 26px 0;
-  }
 }
