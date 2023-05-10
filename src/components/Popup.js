@@ -2,7 +2,6 @@ export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._buttonClose = this._popup.querySelector('.popup__close');
-    this._buttonSubmit = this._popup.querySelector('.popup__submit');
   }
 
   // ф-ия открытия Popup
@@ -21,17 +20,6 @@ export default class Popup {
   _handleEscClosePopup = (evt) => {
     if (evt.key === 'Escape') {
       this.close();
-    }
-  }
-
-  // ф-ия отображения Preloader 
-  renderPreloader(loading, displayText) {
-    if (!this._buttonSubmit) return;
-    if (loading) {
-      this.defaulText = this._buttonSubmit.textContent;
-      this._buttonSubmit.textContent = displayText;
-    } else {
-      this._buttonSubmit.textContent = this.defaulText;
     }
   }
 

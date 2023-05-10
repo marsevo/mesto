@@ -17,7 +17,7 @@ class PopupWithForm extends Popup {
         });
         return this._inputsValues;
     }
-    
+
     // ф-ия добавления переданных данных в инпут
     addInputValues = (data) => {
         this._inputList.forEach((input, i) => {
@@ -29,6 +29,17 @@ class PopupWithForm extends Popup {
     close() {
         this._formSubmit.reset();
         super.close();
+    }
+
+    // ф-ия отображения Preloader 
+    renderPreloader(loading, displayText) {
+        if (!this._buttonSubmit) return;
+        if (loading) {
+            this.defaulText = this._buttonSubmit.textContent;
+            this._buttonSubmit.textContent = displayText;
+        } else {
+            this._buttonSubmit.textContent = this.defaulText;
+        }
     }
 
     setEventListeners() {

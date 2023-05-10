@@ -112,6 +112,7 @@ const popupAvatarForm = new PopupWithForm('#update-avatar', {
         userInfo.setUserAvatar(resUser);
         popupAvatarForm.close();
       })
+      .catch((err) => alert(err))
       .finally(() => {
         popupAvatarForm.renderPreloader(false);
       })
@@ -133,6 +134,7 @@ const popupAddPicture = new PopupWithForm('#add-popup', {
         cardsSection.prependItem(createCard(newCard, userCurrentId));
         popupAddPicture.close();
       })
+      .catch((err) => alert(err))
       .finally(() => {
         popupAddPicture.renderPreloader(false);
       })
@@ -155,6 +157,7 @@ const popupFormDelete = new PopupWithDeletion('#deletion-confirmation', {
         card = null;
         popupFormDelete.close();
       })
+      .catch((err) => alert(err))
       .finally(() => {
         popupFormDelete.renderPreloader(false);
       })

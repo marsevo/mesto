@@ -4,6 +4,7 @@ class PopupWithDeletion extends Popup {
   constructor(selectorPopup, { submitCallback }) {
     super(selectorPopup);
     this._submitCallback = submitCallback;
+    this._buttonSubmit = this._popup.querySelector('.popup__submit');
   }
 
   // ф-ия открытия Popup и получения данных карточки
