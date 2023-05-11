@@ -13,7 +13,16 @@ class PopupWithDeletion extends Popup {
     this.id = idCard;
     this.card = cardElement;
   }
-
+  // ф-ия отображения Preloader 
+  renderPreloader(loading, displayText) {
+    if (!this._buttonSubmit) return;
+    if (loading) {
+      this.defaulText = this._buttonSubmit.textContent;
+      this._buttonSubmit.textContent = displayText;
+    } else {
+      this._buttonSubmit.textContent = this.defaulText;
+    }
+  }
   setEventListeners() {
     super.setEventListeners();
     this._buttonSubmit.addEventListener('click', () => {
